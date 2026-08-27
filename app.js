@@ -1,176 +1,48 @@
-const STORAGE_KEY = "shala_state_v1";
-const defaults = {
-  giftOpened:false,
-  createMeCompleted:false,
-  canon:null,
-  favorites:[null,null,null],
-  firstFavoriteTriviaShown:false,
-  pendingReveal:null,
-  screen:"gift",
-  focus:null,
-  pose:null,
-  studio:null,
-  stage:null,
-  currentImage:null
-};
-let state = {...defaults, ...load()};
-const app = document.querySelector("#app");
+const STORAGE_KEY="shala_state_v1";
+const CM_KEY="shala_create_me_draft_v1";
+const defaults={giftOpened:false,createMeCompleted:false,canon:null,favorites:[null,null,null],firstFavoriteTriviaShown:false,pendingReveal:null,screen:"gift",focus:null,pose:null,studio:null,stage:null,currentImage:null};
+let state={...defaults,...load(STORAGE_KEY)};
+let cm={step:"face",face:null,heightCm:null,weightKg:null,bustCm:null,waistCm:null,hipsCm:null,candidate:null,manualChoice:null,...load(CM_KEY)};
+const app=document.querySelector("#app");
 
-function load(){
-  try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")}catch{return {}}
-}
-function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}
-function set(patch){state={...state,...patch};save();render()}
-function btn(text, cls, fn){
-  const b=document.createElement("button"); b.textContent=text; b.className=cls; b.addEventListener("click",fn); return b;
-}
-function shell(title){
-  app.innerHTML="";
-  const s=document.createElement("section"); s.className="screen";
-  if(title){const h=document.createElement("div"); h.className="stage center"; h.textContent=title; s.append(h)}
-  app.append(s); return s;
-}
+function load(k){try{return JSON.parse(localStorage.getItem(k)||"{}")}catch{return {}}}
+function persist(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));localStorage.setItem(CM_KEY,JSON.stringify(cm))}
+function set(patch){state={...state,...patch};persist();render()}
+function setCM(patch){cm={...cm,...patch};persist();createMe()}
+function btn(text,cls,fn){const b=document.createElement("button");b.textContent=text;b.className=cls;b.addEventListener("click",fn);return b}
+function shell(title){app.innerHTML="";const s=document.createElement("section");s.className="screen";if(title){const h=document.createElement("div");h.className="stage center";h.textContent=title;s.append(h)}app.append(s);return s}
+function field(label,id,value,attrs=""){return `<label class="field"><span>${label}</span><input id="${id}" value="${value??""}" ${attrs}></label>`}
+function clamp(n,min,max){return Math.min(max,Math.max(min,n))}
+const inch=cmv=>cmv/2.54, cmFromIn=inv=>inv*2.54, lb=kg=>kg*2.2046226218, kgFromLb=v=>v/2.2046226218;
+function ftIn(c){if(!c)return {ft:"",inch:""};const total=inch(c),ft=Math.floor(total/12);return {ft,inch:(total-ft*12).toFixed(1)}}
+function bodyShape(b,w,h){if(!b||!w||!h)return "rectangle";const bust=b,waist=w,hips=h;const bh=Math.abs(bust-hips)/Math.max(bust,hips);const waistDrop=Math.min((bust-waist)/bust,(hips-waist)/hips);if(waistDrop>=.22&&bh<=.06)return "hourglass";if(hips>bust*1.08)return waistDrop>=.18?"bottom-hourglass":"pear";if(bust>hips*1.08)return waistDrop>=.18?"top-hourglass":"inverted-triangle";if(waist>=Math.min(bust,hips)*.88)return "apple";return "rectangle"}
+function resolver(){const h=cm.heightCm,w=cm.weightKg;if(!h||!w)return null;const bmi=w/((h/100)**2);const height=h<157?"short":h<170?"medium":"tall";const build=bmi<21?"lean":bmi<27?"medium":"full";const shape=bodyShape(cm.bustCm,cm.waistCm,cm.hipsCm);const heights={short:0,medium:1,tall:2},builds={lean:0,medium:1,full:2},shapes=["hourglass","bottom-hourglass","top-hourglass","pear","inverted-triangle","rectangle","apple"];const seed=heights[height]*21+builds[build]*7+shapes.indexOf(shape)+1;return {height,build,shape,seed,bmi:Number(bmi.toFixed(1))}}
+function render(){if(state.pendingReveal&&state.screen!=="reveal")state.screen="reveal";if(!state.giftOpened)return gift();if(!state.createMeCompleted)return createMe();({compact,workshop,pose,studio,clothing,bag,shoes,accessory,reveal,favorites,trend}[state.screen]||compact)()}
 
-function render(){
-  if(state.pendingReveal && state.screen!=="reveal"){state.screen="reveal"}
-  if(!state.giftOpened) return gift();
-  if(!state.createMeCompleted) return createMe();
-  ({
-    compact, workshop, pose, studio, clothing, bag, shoes, accessory, reveal, favorites, trend
-  }[state.screen]||compact)();
-}
+function gift(){const s=shell();const compact=document.createElement("div");compact.className="compact";compact.textContent="SHALA";s.append(compact);const n=document.createElement("div");n.className="note";n.innerHTML=`<div class="cake">🎂</div><h2 class="center">SHALA!</h2><p class="center">Ang app para kay Rasyela</p><p>This is for you to use, explore and most especially—enjoy.</p><p>Thank you for literally saving my life. I'll use up all my chances to return your kindness.</p><p>Forever my sistah, forever your brotha'<br><strong>RJ</strong></p>`;s.append(n);s.append(btn("♡","btn-go",()=>set({giftOpened:true,screen:"createMe"})))}
 
-function gift(){
-  const s=shell();
-  const compact=document.createElement("div"); compact.className="compact"; compact.textContent="SHALA"; s.append(compact);
-  const n=document.createElement("div"); n.className="note";
-  n.innerHTML=`<div class="cake">🎂</div><h2 class="center">SHALA!</h2><p class="center">Ang app para kay Rasyela</p>
-  <p>This is for you to use, explore and most especially—enjoy.</p>
-  <p>Thank you for literally saving my life. I'll use up all my chances to return your kindness.</p>
-  <p>Forever my sistah, forever your brotha'<br><strong>RJ</strong></p>`;
-  s.append(n);
-  s.append(btn("♡","btn-go",()=>set({giftOpened:true,screen:"createMe"})));
-}
+function createMe(){const s=shell("CREATE ME");if(cm.step==="face")return facePane(s);if(cm.step==="height")return heightPane(s);if(cm.step==="weight")return weightPane(s);if(cm.step==="measure")return measurePane(s);if(cm.step==="albus")return albusPane(s);if(cm.step==="confirm")return canonConfirm(s);if(cm.step==="really")return reallyPane(s);if(cm.step==="manual")return manualPane(s);if(cm.step==="manualPreview")return manualPreview(s);cm.step="face";persist();facePane(s)}
+function pane(s,icon,title,copy){const d=document.createElement("div");d.className="create-card";d.innerHTML=`<div class="scene-icon">${icon}</div><h1>${title}</h1><p>${copy}</p>`;s.append(d);return d}
+function facePane(s){const d=pane(s,"📸","FIRST, YOU.","Take or choose a clear front-facing photo. This establishes identity; nothing is uploaded in this BUILD yet.");const input=document.createElement("input");input.type="file";input.accept="image/*";input.capture="user";input.className="file-input";d.append(input);input.addEventListener("change",()=>{if(input.files?.[0]){cm.face=input.files[0].name;persist()}});s.append(btn(cm.face?"CONTINUE":"USE CAMERA / PHOTO","btn-go",()=>setCM({face:cm.face||"demo-face",step:"height"})))}
+function heightPane(s){const d=pane(s,"📏","HOW TALL ARE WE?","Metric and Imperial stay linked. Use whichever feels natural.");const f=ftIn(cm.heightCm);d.insertAdjacentHTML("beforeend",`<div class="unit-grid">${field("CM","heightCm",cm.heightCm,"inputmode=decimal")}${field("FT","heightFt",f.ft,"inputmode=numeric")}${field("IN","heightIn",f.inch,"inputmode=decimal")}</div>`);const sync=()=>{const cmEl=d.querySelector("#heightCm"),ftEl=d.querySelector("#heightFt"),inEl=d.querySelector("#heightIn");cmEl.oninput=()=>{const v=parseFloat(cmEl.value);if(v){const x=ftIn(v);ftEl.value=x.ft;inEl.value=x.inch;cm.heightCm=v;persist()}};const imp=()=>{const ft=parseFloat(ftEl.value)||0,ii=parseFloat(inEl.value)||0;if(ft||ii){const v=cmFromIn(ft*12+ii);cmEl.value=v.toFixed(1);cm.heightCm=v;persist()}};ftEl.oninput=imp;inEl.oninput=imp};sync();s.append(btn("NEXT","btn-go",()=>cm.heightCm?setCM({step:"weight"}):alert("Give SHALA your height, gurl.")))}
+function weightPane(s){const d=pane(s,"⚖️","AND ON THE SCALE?","Height and weight resolve relative build together — never weight alone.");d.insertAdjacentHTML("beforeend",`<div class="unit-grid two">${field("KG","weightKg",cm.weightKg?cm.weightKg.toFixed(1):"","inputmode=decimal")}${field("LB","weightLb",cm.weightKg?lb(cm.weightKg).toFixed(1):"","inputmode=decimal")}</div>`);const kgEl=d.querySelector("#weightKg"),lbEl=d.querySelector("#weightLb");kgEl.oninput=()=>{const v=parseFloat(kgEl.value);if(v){cm.weightKg=v;lbEl.value=lb(v).toFixed(1);persist()}};lbEl.oninput=()=>{const v=parseFloat(lbEl.value);if(v){cm.weightKg=kgFromLb(v);kgEl.value=cm.weightKg.toFixed(1);persist()}};s.append(btn("NEXT","btn-go",()=>cm.weightKg?setCM({step:"measure"}):alert("We need the number on the scale.")))}
+function measurePane(s){const d=pane(s,"🧵","THE TAPE, PLEASE.","Bust, waist and hips help ALBUS resolve geometry. Inches and centimeters remain linked.");const rows=[["BUST","bustCm"],["WAIST","waistCm"],["HIPS","hipsCm"]];rows.forEach(([label,key])=>{d.insertAdjacentHTML("beforeend",`<div class="measure-row"><strong>${label}</strong>${field("CM",key,cm[key]?cm[key].toFixed(1):"","inputmode=decimal")}${field("IN",key+"In",cm[key]?inch(cm[key]).toFixed(1):"","inputmode=decimal")}</div>`);const c=d.querySelector(`#${key}`),i=d.querySelector(`#${key}In`);c.oninput=()=>{const v=parseFloat(c.value);if(v){cm[key]=v;i.value=inch(v).toFixed(1);persist()}};i.oninput=()=>{const v=parseFloat(i.value);if(v){cm[key]=cmFromIn(v);c.value=cm[key].toFixed(1);persist()}}});s.append(btn("DO THE MATH","btn-go",()=>cm.bustCm&&cm.waistCm&&cm.hipsCm?setCM({candidate:resolver(),step:"albus"}):alert("Bust, waist and hips first, gurl.")))}
+function albusPane(s){pane(s,"🧮","ALBUS IS DOING THE MATH...","One dramatic calculator later.");setTimeout(()=>{if(cm.step==="albus")setCM({candidate:resolver(),step:"confirm"})},900)}
+function silhouette(shape){const glyph={hourglass:"⌛", "bottom-hourglass":"♢", "top-hourglass":"♢",pear:"🍐","inverted-triangle":"▽",rectangle:"▯",apple:"◯"}[shape]||"◇";return `<div class="silhouette"><span>${glyph}</span><small>SEED ${cm.candidate?.seed||"—"}</small></div>`}
+function canonConfirm(s){const d=pane(s,"✨","DOES THIS RESEMBLE YOU?","ALBUS has proposed one Canon candidate. You have final authority.");d.insertAdjacentHTML("beforeend",silhouette(cm.candidate?.shape));const a=document.createElement("div");a.className="actions cols2";a.append(btn("NO","btn-neutral",()=>setCM({step:"really"})));a.append(btn("YES","btn-go",()=>acceptCanon(cm.candidate)));s.append(a)}
+function reallyPane(s){pane(s,"👀","REALLY, GURL?","Math has feelings now.");const a=document.createElement("div");a.className="actions cols2";a.append(btn("GO BACK","btn-neutral",()=>setCM({step:"confirm"})));a.append(btn("NA-AH!","btn-go",()=>setCM({step:"manual"})));s.append(a)}
+function manualPane(s){const d=pane(s,"👗","WHICH ONE FEELS LIKE YOU?","Same height/build family. Seven body geometries. No ranking, no winner.");const shapes=["pear","top-hourglass","rectangle","hourglass","apple","bottom-hourglass","inverted-triangle"];const g=document.createElement("div");g.className="body-grid";shapes.forEach((shape,i)=>{const b=btn(`${["♢","♢","▯","⌛","◯","♢","▽"][i]}`,"body-choice",()=>setCM({manualChoice:shape,step:"manualPreview"}));b.setAttribute("aria-label",`Body option ${i+1}`);g.append(b)});d.append(g)}
+function manualPreview(s){const d=pane(s,"✨","THIS ONE?","Preview before committing your Canon.");d.insertAdjacentHTML("beforeend",silhouette(cm.manualChoice));const a=document.createElement("div");a.className="actions cols2";a.append(btn("CHOOSE AGAIN","btn-neutral",()=>setCM({step:"manual"})));a.append(btn("THIS ONE","btn-go",()=>acceptCanon({...cm.candidate,shape:cm.manualChoice,manualOverride:true})));s.append(a)}
+function acceptCanon(canon){state={...state,createMeCompleted:true,canon,screen:"compact"};cm={...cm,step:"complete"};persist();render()}
 
-function createMe(){
-  const s=shell("CREATE ME");
-  const card=document.createElement("div"); card.className="note";
-  card.innerHTML=`<h2>Let's get your fit.</h2>
-  <p>HEIGHT</p><input id="height" inputmode="decimal" placeholder="165 cm / 5'5&quot;">
-  <p>WEIGHT</p><input id="weight" inputmode="decimal" placeholder="58 kg / 128 lb">
-  <p>BUST · WAIST · HIPS</p><input id="measure" placeholder="38 · 31 · 37 in">`;
-  s.append(card);
-  const al=document.createElement("div"); al.className="albus"; al.textContent="🧮"; s.append(al);
-  s.append(btn("LOOKS RIGHT","btn-go",()=>set({
-    createMeCompleted:true,
-    canon:{profile:"seeded-demo"},
-    screen:"compact"
-  })));
-}
-
-function compact(){
-  const s=shell();
-  const c=document.createElement("div"); c.className="compact"; c.textContent="SHALA"; s.append(c);
-  const p=document.createElement("div"); p.className="palette";
-  [["MIRROR ON THE WALL","btn-neutral",()=>alert("Mirror: front-camera shell reserved for implementation")],
-   ["EXPLORE","pan explore",()=>set({screen:"workshop"})],
-   ["TREND ALERT","pan trend",()=>set({screen:"trend"})],
-   ["FAVORITES","pan faves",()=>set({screen:"favorites"})]
-  ].forEach(([t,cl,f])=>p.append(btn(t,cl,f)));
-  s.append(p);
-}
-
-function workshop(){
-  const s=shell("WHAT ARE WE TRYING ON?");
-  const hs=document.createElement("div"); hs.className="hotspots";
-  ["CLOTHES","BAGS","SHOES","ACCESSORIES"].forEach(x=>{
-    hs.append(btn(`${x}\nTRY ME`,"hotspot",()=>set({focus:x.toLowerCase(),screen:"pose"})));
-  });
-  s.append(hs);
-}
-
-function pose(){
-  const s=shell("POSE");
-  const g=document.createElement("div"); g.className="pose-grid";
-  Array.from({length:10},(_,i)=>g.append(btn(`POSE ${i+1}`,"pose",()=>set({pose:i+1,screen:"studio"}))));
-  s.append(g);
-  s.append(btn("START AGAIN","btn-peached",()=>set({focus:null,pose:null,studio:null,stage:null,currentImage:null,screen:"workshop"})));
-}
-
-function studio(){
-  const s=shell("STUDIO");
-  ["INDOOR OFFICE","INDOOR LIVING ROOM","INDOOR DISCO","OUTDOOR SUNNY PATIO","OUTDOOR GOLDEN HOUR"].forEach(x=>{
-    s.append(btn(x,"btn-neutral",()=>set({studio:x,stage:"clothing",screen:"clothing",currentImage:"POSE + STUDIO"})));
-  });
-}
-
-function buildStage(name,next){
-  const s=shell(name.toUpperCase());
-  const h=document.createElement("div"); h.className="hero"; h.innerHTML=`<div class="center"><h2>${state.currentImage||"LAST GOOD IMAGE"}</h2><p>SHOW ME</p></div>`; s.append(h);
-  const a=document.createElement("div"); a.className="actions";
-  a.append(btn("SLAP IT","btn-go",()=>set({currentImage:`${state.currentImage||"LOOK"} + ${name.toUpperCase()}`,stage:next,screen:next||"reveal",pendingReveal:next?state.pendingReveal:{image:`${state.currentImage||"LOOK"} + ${name.toUpperCase()}`}})));
-  a.append(btn("SKIP >>>","btn-neutral",()=>set({stage:next,screen:next||"reveal",pendingReveal:next?state.pendingReveal:{image:state.currentImage||"LOOK"}})));
-  a.append(btn("START AGAIN","btn-peached",()=>set({focus:null,pose:null,studio:null,stage:null,currentImage:null,pendingReveal:null,screen:"workshop"})));
-  s.append(a);
-}
-const clothing=()=>buildStage("clothing","bag");
-const bag=()=>buildStage("bag","shoes");
-const shoes=()=>buildStage("shoes","accessory");
-const accessory=()=>buildStage("accessory",null);
-
-function reveal(){
-  const s=shell();
-  const h=document.createElement("div"); h.className="hero"; h.innerHTML=`<div class="center"><h1>WERK!</h1><p>${state.pendingReveal?.image||state.currentImage||"FINAL LOOK"}</p></div>`; s.append(h);
-  const c=document.createElement("div"); c.className="reveal-controls hidden";
-  c.append(btn("♡ MARK FAVORITE","btn-neutral",favoriteCurrent));
-  c.append(btn("↓ SAVE TO DEVICE","btn-neutral",()=>alert("In saving, you serve.")));
-  c.append(btn("TRY NEW ONE","btn-go",()=>set({pendingReveal:null,focus:null,pose:null,studio:null,stage:null,currentImage:null,screen:"workshop"})));
-  s.append(c);
-  let shown=false;
-  const show=()=>{if(!shown){shown=true;c.classList.remove("hidden")}};
-  const timer=setTimeout(show,10000);
-  h.addEventListener("dblclick",()=>{clearTimeout(timer);show()});
-  h.addEventListener("click",()=>{if(shown)c.classList.toggle("hidden")});
-}
-function favoriteCurrent(){
-  const img=state.pendingReveal?.image||state.currentImage||"FAVORITE";
-  let f=[...state.favorites];
-  const order=[1,0,2];
-  const slot=order.find(i=>!f[i]);
-  if(slot===undefined){alert("Three's a crowd, gurl. Pick one to let go."); return}
-  f[slot]=img;
-  const showTrivia=!state.firstFavoriteTriviaShown;
-  state={...state,favorites:f,firstFavoriteTriviaShown:true}; save();
-  if(showTrivia) alert("DID YOU KNOW?\n\nWe rendered 63 versions of you,\nand that's how much we love YOU.");
-  render();
-}
-function favorites(){
-  const s=shell("FAVORITE THINGS");
-  const g=document.createElement("div"); g.className="pose-grid";
-  ["LEFT","CENTER","RIGHT"].forEach((name,i)=>{
-    g.append(btn(`${name}\n${state.favorites[i]||"EMPTY FRAME"}`,"pose",()=>{}));
-  });
-  s.append(g);
-  s.append(btn("MANAGE FAVORITES","btn-neutral",()=>alert("Management mode shell reserved.")));
-  s.append(btn("HOME","btn-go",()=>set({screen:"compact"})));
-}
-function trend(){
-  const s=shell("TREND ALERT");
-  const lanes=["lounge clothes","street style","casual","Sunday's best"];
-  const buzz={
-    "lounge clothes":["elevated loungewear","co-ord","soft tailoring","luxury basics","relaxed fit"],
-    "street style":["fashion week","it girl","runway inspired","streetwear","editorial"],
-    "casual":["elevated basics","off duty","effortless","quiet luxury","capsule wardrobe"],
-    "Sunday's best":["occasion dressing","polished","feminine","elegant","church outfit"]
-  };
-  const lane=lanes[Math.floor(Math.random()*lanes.length)];
-  const picks=[...buzz[lane]].sort(()=>Math.random()-.5).slice(0,2);
-  const now=new Date();
-  const month=now.toLocaleString(undefined,{month:"long"});
-  const q=`women's ${lane} ${picks.join(" ")} ${month} ${now.getFullYear()} fashion magazine`;
-  const d=document.createElement("div"); d.className="note"; d.innerHTML=`<h2>${lane.toUpperCase()}</h2><p>${picks.join(" · ")}</p><p>${month} ${now.getFullYear()}</p>`; s.append(d);
-  s.append(btn("SHOW ME","btn-go",()=>window.open(`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(q)}`,"_blank")));
-  s.append(btn("PULL AGAIN","btn-neutral",trend));
-  s.append(btn("HOME","btn-neutral",()=>set({screen:"compact"})));
-}
+function compact(){const s=shell();const c=document.createElement("div");c.className="compact";c.textContent="SHALA";s.append(c);const p=document.createElement("div");p.className="palette";[["MIRROR ON THE WALL","btn-neutral",()=>alert("Mirror camera follows in the next BUILD slice.")],["EXPLORE","pan explore",()=>set({screen:"workshop"})],["TREND ALERT","pan trend",()=>set({screen:"trend"})],["FAVORITES","pan faves",()=>set({screen:"favorites"})]].forEach(([t,cl,f])=>p.append(btn(t,cl,f)));s.append(p)}
+function workshop(){const s=shell("WHAT ARE WE TRYING ON?");const hs=document.createElement("div");hs.className="hotspots";["CLOTHES","BAGS","SHOES","ACCESSORIES"].forEach(x=>hs.append(btn(`${x}\nTRY ME`,"hotspot",()=>set({focus:x.toLowerCase(),screen:"pose"}))));s.append(hs)}
+function pose(){const s=shell("POSE");const g=document.createElement("div");g.className="pose-grid";Array.from({length:10},(_,i)=>g.append(btn(`POSE ${i+1}`,"pose",()=>set({pose:i+1,screen:"studio"}))));s.append(g);s.append(btn("START AGAIN","btn-peached",()=>set({focus:null,pose:null,studio:null,stage:null,currentImage:null,screen:"workshop"})))}
+function studio(){const s=shell("STUDIO");["INDOOR OFFICE","INDOOR LIVING ROOM","INDOOR DISCO","OUTDOOR SUNNY PATIO","OUTDOOR GOLDEN HOUR"].forEach(x=>s.append(btn(x,"btn-neutral",()=>set({studio:x,stage:"clothing",screen:"clothing",currentImage:"POSE + STUDIO"}))))}
+function buildStage(name,next){const s=shell(name.toUpperCase());const h=document.createElement("div");h.className="hero";h.innerHTML=`<div class="center"><h2>${state.currentImage||"LAST GOOD IMAGE"}</h2><p>SHOW ME</p></div>`;s.append(h);const a=document.createElement("div");a.className="actions";a.append(btn("SLAP IT","btn-go",()=>set({currentImage:`${state.currentImage||"LOOK"} + ${name.toUpperCase()}`,stage:next,screen:next||"reveal",pendingReveal:next?state.pendingReveal:{image:`${state.currentImage||"LOOK"} + ${name.toUpperCase()}`}})));a.append(btn("SKIP >>>","btn-neutral",()=>set({stage:next,screen:next||"reveal",pendingReveal:next?state.pendingReveal:{image:state.currentImage||"LOOK"}})));a.append(btn("START AGAIN","btn-peached",()=>set({focus:null,pose:null,studio:null,stage:null,currentImage:null,pendingReveal:null,screen:"workshop"})));s.append(a)}
+const clothing=()=>buildStage("clothing","bag"),bag=()=>buildStage("bag","shoes"),shoes=()=>buildStage("shoes","accessory"),accessory=()=>buildStage("accessory",null);
+function reveal(){const s=shell();const h=document.createElement("div");h.className="hero";h.innerHTML=`<div class="center"><h1>WERK!</h1><p>${state.pendingReveal?.image||state.currentImage||"FINAL LOOK"}</p></div>`;s.append(h);const c=document.createElement("div");c.className="reveal-controls hidden";c.append(btn("♡ MARK FAVORITE","btn-neutral",favoriteCurrent));c.append(btn("↓ SAVE TO DEVICE","btn-neutral",()=>alert("In saving, you serve.")));c.append(btn("TRY NEW ONE","btn-go",()=>set({pendingReveal:null,focus:null,pose:null,studio:null,stage:null,currentImage:null,screen:"workshop"})));s.append(c);let shown=false;const show=()=>{if(!shown){shown=true;c.classList.remove("hidden")}};const timer=setTimeout(show,10000);h.addEventListener("dblclick",()=>{clearTimeout(timer);show()});h.addEventListener("click",()=>{if(shown)c.classList.toggle("hidden")})}
+function favoriteCurrent(){const img=state.pendingReveal?.image||state.currentImage||"FAVORITE";let f=[...state.favorites];const order=[1,0,2],slot=order.find(i=>!f[i]);if(slot===undefined){alert("Three's a crowd, gurl. Pick one to let go.");return}f[slot]=img;const showTrivia=!state.firstFavoriteTriviaShown;state={...state,favorites:f,firstFavoriteTriviaShown:true};persist();if(showTrivia)alert("DID YOU KNOW?\n\nWe rendered 63 versions of you,\nand that's how much we love YOU.");render()}
+function favorites(){const s=shell("FAVORITE THINGS");const g=document.createElement("div");g.className="pose-grid";["LEFT","CENTER","RIGHT"].forEach((name,i)=>g.append(btn(`${name}\n${state.favorites[i]||"EMPTY FRAME"}`,"pose",()=>{})));s.append(g);s.append(btn("MANAGE FAVORITES","btn-neutral",()=>alert("Management mode follows.")));s.append(btn("HOME","btn-go",()=>set({screen:"compact"})))}
+let lastLane=null;function trend(){const s=shell("TREND ALERT");const lanes=["lounge clothes","street style","casual","Sunday's best"];let choices=lanes.filter(x=>x!==lastLane),lane=choices[Math.floor(Math.random()*choices.length)];lastLane=lane;const buzz={"lounge clothes":["elevated loungewear","co-ord","soft tailoring","luxury basics","relaxed fit"],"street style":["fashion week","it girl","runway inspired","streetwear","editorial"],casual:["elevated basics","off duty","effortless","quiet luxury","capsule wardrobe"],"Sunday's best":["occasion dressing","polished","feminine","elegant","church outfit"]};const picks=[...buzz[lane]].sort(()=>Math.random()-.5).slice(0,2),now=new Date(),month=now.toLocaleString(undefined,{month:"long"}),q=`women's ${lane} ${picks.join(" ")} ${month} ${now.getFullYear()} fashion magazine`;const d=document.createElement("div");d.className="note";d.innerHTML=`<h2>${lane.toUpperCase()}</h2><p>${picks.join(" · ")}</p><p>${month} ${now.getFullYear()}</p>`;s.append(d);s.append(btn("SHOW ME","btn-go",()=>window.open(`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(q)}`,"_blank")));s.append(btn("PULL AGAIN","btn-neutral",trend));s.append(btn("HOME","btn-neutral",()=>set({screen:"compact"})))}
 render();
