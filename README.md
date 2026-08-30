@@ -1,3 +1,16 @@
+# SHALA — Birthday Release Candidate
+
+Mobile-first HTML/CSS/JS local merge preserving the existing GitHub V2 architecture.
+
+## Local merge — 2026-08-30
+Preserved: app-v2.js, generator.js, media-store.js, index.html, existing persistence/IndexedDB/generation boundaries.
+
+Integrated: corrected 63 Canons; approved Canon-34 10 poses; 6 Studios / 13 studio assets; Busy ALBUS; Reveal icons; single-category forward-only Try-On path; visual pose/studio selectors; 10-second Reveal Piety.
+
+Boundary: generator.js remains the generation service boundary. No production API credential was invented.
+
+---
+
 # SHALA — BUILD 001
 
 Mobile-first web prototype implementing the locked SHALA railway before ornamental polish.
