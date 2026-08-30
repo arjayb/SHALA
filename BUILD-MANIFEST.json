@@ -1,0 +1,492 @@
+[
+  {
+    "path": "README.md",
+    "bytes": 1670,
+    "sha256": "2eb563baf0991c52643941317a26062f49dac280b5d4c1c23808e3d7897ef26c"
+  },
+  {
+    "path": "app-v2.js",
+    "bytes": 21892,
+    "sha256": "4d9db0306547b8776d0abdbe4d49057c3f953781a53f376853b015841c0d1b2f"
+  },
+  {
+    "path": "app.js",
+    "bytes": 14163,
+    "sha256": "29e0d245c9589893a6c450e1be12833b0cca8f7fdf887a58490d16e166334dba"
+  },
+  {
+    "path": "assets/albus/ALBUS-BUSY-V02-APPROVED.png",
+    "bytes": 2341122,
+    "sha256": "617b0796ef5437ffa923b91da5fba99f045b70d1f22775de966eefeeb3a0ac31"
+  },
+  {
+    "path": "assets/albus/ALBUS-STANDALONE-V01-APPROVED.png",
+    "bytes": 1865390,
+    "sha256": "f4096fa6cb36db735e3e07cd0c97d66cf4ed09ad13f09007ec8434aafcb352c9"
+  },
+  {
+    "path": "assets/canon/CANON-01.png",
+    "bytes": 1396397,
+    "sha256": "2860cf9b1065a151028d4c0ee593a6cc8c27b0bd150b444e443f7452cc589416"
+  },
+  {
+    "path": "assets/canon/CANON-02.png",
+    "bytes": 1347413,
+    "sha256": "2a5eafdf387b48340cdc6dcd609ab13f51b3d4b23f31eb7df7b831ffc58b69bf"
+  },
+  {
+    "path": "assets/canon/CANON-03.png",
+    "bytes": 1364598,
+    "sha256": "d33c29a720811adabfdd8fb3bfb525ba0b3fcf099b9a7bc5f97da03b9907f370"
+  },
+  {
+    "path": "assets/canon/CANON-04.png",
+    "bytes": 1364580,
+    "sha256": "11a50f0b7e593fe80c0e6054749905adb20500e746b6c1a25ee35d2e81266b3f"
+  },
+  {
+    "path": "assets/canon/CANON-05.png",
+    "bytes": 1359248,
+    "sha256": "83030f96e5982038ae077e8b6dc46088ac7b50b7e61474d38a60805ed313f616"
+  },
+  {
+    "path": "assets/canon/CANON-06.png",
+    "bytes": 1334766,
+    "sha256": "6c4848b7344412290a2dc46144398aeac897bff84bba4eff681c636beec5e3d1"
+  },
+  {
+    "path": "assets/canon/CANON-07.png",
+    "bytes": 1356400,
+    "sha256": "dedff95be08b7bb5ac47f6c5601052877328bffe459ef63407948ebeeb859128"
+  },
+  {
+    "path": "assets/canon/CANON-08.png",
+    "bytes": 1362505,
+    "sha256": "5c328635573711fc3dec5f1c0bb62d3ad43775e76aad9b2ca372cbce7d3b35db"
+  },
+  {
+    "path": "assets/canon/CANON-09.png",
+    "bytes": 1411334,
+    "sha256": "200f08a43d5d90423be86d311af1c46b56322f637e3cb9f7304f3c033db478eb"
+  },
+  {
+    "path": "assets/canon/CANON-10.png",
+    "bytes": 1384869,
+    "sha256": "a80bb5dee5b5f7caf03100267a814e04bdd24424bcf3d637d653a68da4cdfd59"
+  },
+  {
+    "path": "assets/canon/CANON-11.png",
+    "bytes": 1411691,
+    "sha256": "602d47fba1b73712e6fdd89ea2705f6d23cee0f782060a6768d89090f41e6007"
+  },
+  {
+    "path": "assets/canon/CANON-12.png",
+    "bytes": 1384063,
+    "sha256": "5f00cc808a405392c3687ecc2e7d3acb506b4ff5e2eb78152412db7eee626874"
+  },
+  {
+    "path": "assets/canon/CANON-13.png",
+    "bytes": 1391741,
+    "sha256": "626fa40cd362f50f59bc5ad6ea4078548f28dd5d3a162c98a450f6178d925732"
+  },
+  {
+    "path": "assets/canon/CANON-14.png",
+    "bytes": 1439361,
+    "sha256": "3fb103612a4f831f6da2d2631d5874e6afc763bc468b536a09851c94c4421e67"
+  },
+  {
+    "path": "assets/canon/CANON-15.png",
+    "bytes": 1448588,
+    "sha256": "c97bb220beb6b988a7800ec321cb481e1c8d7cf1fa3696ad12abdc4a0eaa1bfa"
+  },
+  {
+    "path": "assets/canon/CANON-16.png",
+    "bytes": 1432091,
+    "sha256": "a5c4187652d44cb0deea35a4467d6f518a0eba7e813030a64390924a64a191e9"
+  },
+  {
+    "path": "assets/canon/CANON-17.png",
+    "bytes": 1469068,
+    "sha256": "beda90821b6d9314419f1bdafd6b5bea3222e9e13d44a6b95d27ec207bf20d85"
+  },
+  {
+    "path": "assets/canon/CANON-18.png",
+    "bytes": 1475856,
+    "sha256": "4bfe1ed78e06ab0f2cf1a7d971099785ce9e757aaecba4eec3fb7abfab1d769c"
+  },
+  {
+    "path": "assets/canon/CANON-19.png",
+    "bytes": 1461570,
+    "sha256": "5dbf9422b8e0da3c9121cd642ccc312d636e3c9693549b061f5fcc1595918e96"
+  },
+  {
+    "path": "assets/canon/CANON-20.png",
+    "bytes": 1509095,
+    "sha256": "7cb86d190eb1f8c689d880b8f750c7b658d161e8850e7584d0d5c7d36683ef83"
+  },
+  {
+    "path": "assets/canon/CANON-21.png",
+    "bytes": 1522398,
+    "sha256": "140fb77b4283242c65024bdd9b71286c56fe3119bc4fd783488828baaa38a335"
+  },
+  {
+    "path": "assets/canon/CANON-22.png",
+    "bytes": 1495969,
+    "sha256": "09bc7494930669758205d1b4cf75eb280fb140b36005e9e5cd3fbbd2d26a1f3e"
+  },
+  {
+    "path": "assets/canon/CANON-23.png",
+    "bytes": 1428416,
+    "sha256": "d57d959243141b2cbe0bdaa68420489cc75dd0306d179ec32127bf4587650c6f"
+  },
+  {
+    "path": "assets/canon/CANON-24.png",
+    "bytes": 1429388,
+    "sha256": "6f4a7e91031f94fecce110a8635f06f6ce1540de0bf8e3d806ff4d3761c428ed"
+  },
+  {
+    "path": "assets/canon/CANON-25.png",
+    "bytes": 1444981,
+    "sha256": "2081a013e5367e5b8eb8e8a6ee86295973fc5e827218b3d04e77ed297e4c3097"
+  },
+  {
+    "path": "assets/canon/CANON-26.png",
+    "bytes": 1405243,
+    "sha256": "fbbfdf5a375de749e58215692c262922f72a6ae56815df85568aed61af5b1282"
+  },
+  {
+    "path": "assets/canon/CANON-27.png",
+    "bytes": 1424550,
+    "sha256": "20f486efb9e1888e0bd48fda19a4bef6fef0b549b6e3248b40693b9cb2a20155"
+  },
+  {
+    "path": "assets/canon/CANON-28.png",
+    "bytes": 1394600,
+    "sha256": "94d06495ad986d7af7f86aed4e9a7a3fa6e603bf127859ef6c70b7a0862a3aac"
+  },
+  {
+    "path": "assets/canon/CANON-29.png",
+    "bytes": 1408642,
+    "sha256": "02db349bc41060888cf56c359a1f5806607bf881e206f3f979a57a711a1145ee"
+  },
+  {
+    "path": "assets/canon/CANON-30.png",
+    "bytes": 1397621,
+    "sha256": "e3b626ef7c218f6507abab11369ca0c7b9bed29ee4d2d6bfd04c322c618383f1"
+  },
+  {
+    "path": "assets/canon/CANON-31.png",
+    "bytes": 1425400,
+    "sha256": "2774e85ab7a167a24ceed806a4f54b6cbb8d6f1d14445f8db6175c425e3f42b9"
+  },
+  {
+    "path": "assets/canon/CANON-32.png",
+    "bytes": 1412484,
+    "sha256": "fd558e40c5a41155b667074f36abf97b7430bd01676b7de540973fd932ced6bb"
+  },
+  {
+    "path": "assets/canon/CANON-33.png",
+    "bytes": 1418162,
+    "sha256": "9eee7aead0c0478572fad5f2f85b37e6aca58e62bc535ad4c778480171fdb16d"
+  },
+  {
+    "path": "assets/canon/CANON-34.png",
+    "bytes": 1424766,
+    "sha256": "929f135a80889f507ad45033ed21d6da05248bdf75c80dec4ff391d7a98daf70"
+  },
+  {
+    "path": "assets/canon/CANON-35.png",
+    "bytes": 1407509,
+    "sha256": "a2831aaa320d667877fa2b7d27be357d52c7cf967eacac804be2d5f6f1453fd7"
+  },
+  {
+    "path": "assets/canon/CANON-36.png",
+    "bytes": 1473687,
+    "sha256": "17e13b0d039c31cabe8adaeeef0c5324221e05615e183ccae6e49164411dc68e"
+  },
+  {
+    "path": "assets/canon/CANON-37.png",
+    "bytes": 1499915,
+    "sha256": "f0cd4fde7ab824c8d54ec71068453956a923eb46ab654207c45541e10ef06b30"
+  },
+  {
+    "path": "assets/canon/CANON-38.png",
+    "bytes": 1418622,
+    "sha256": "a37662ffaeedbe9f735fa20c2cf3198a10a1ad3ad99de1100cc85d65777362a4"
+  },
+  {
+    "path": "assets/canon/CANON-39.png",
+    "bytes": 1474383,
+    "sha256": "d969aab48b55ec17214cd03adea7ebd740fe2629b2a1e5e195bb2d3db6c4a4e7"
+  },
+  {
+    "path": "assets/canon/CANON-40.png",
+    "bytes": 1525153,
+    "sha256": "89e0bb2638b0c74ffd5823dd8506e709887d764a199432eae6315a53b108c47d"
+  },
+  {
+    "path": "assets/canon/CANON-41.png",
+    "bytes": 1546666,
+    "sha256": "d792e3d6e19caf5b4266fa416dd6754e4d4debe4e29e03ed7c69f8fe53c809ea"
+  },
+  {
+    "path": "assets/canon/CANON-42.png",
+    "bytes": 1600089,
+    "sha256": "f9d926f7c7a04543af63a0df7469ce9009acecc9ff75cb92e2e6121bed572788"
+  },
+  {
+    "path": "assets/canon/CANON-43.png",
+    "bytes": 1419199,
+    "sha256": "a1715d448d228b4b90c136294894975974ba8a1b34f29c2a896660579d663ad0"
+  },
+  {
+    "path": "assets/canon/CANON-44.png",
+    "bytes": 1411078,
+    "sha256": "1247a3bca3e08cd658ae40138e32c0b7a18d1cfffac409fdfef3adbc570f3e32"
+  },
+  {
+    "path": "assets/canon/CANON-45.png",
+    "bytes": 1393706,
+    "sha256": "d8ebe3fa44f7990920126c237811fbdfa5bcf5a87a0555c0aa782509e7a58bf8"
+  },
+  {
+    "path": "assets/canon/CANON-46.png",
+    "bytes": 1374236,
+    "sha256": "7574f03c35c5038013f937d7b85c3f39abb0fe710a6e948ff59c8b2d9f9f3930"
+  },
+  {
+    "path": "assets/canon/CANON-47.png",
+    "bytes": 1359608,
+    "sha256": "ea43c5d2f8ae97a280b7799b38aa50b60904667a4f62d489121f5fb8ade971f3"
+  },
+  {
+    "path": "assets/canon/CANON-48.png",
+    "bytes": 1383429,
+    "sha256": "f0bb391bf0814885b228feff4e1e7db9024a249a19ca527cd94c215699de0f72"
+  },
+  {
+    "path": "assets/canon/CANON-49.png",
+    "bytes": 1387836,
+    "sha256": "c543cdacb0f235eb81dc8daa97edf32cd936a174de32434232af77a1285422c8"
+  },
+  {
+    "path": "assets/canon/CANON-50.png",
+    "bytes": 1408289,
+    "sha256": "006f41af9138b2547589a7b02040a84b3e2b35fa3ecc2c96a2721c27fb2c64f7"
+  },
+  {
+    "path": "assets/canon/CANON-51.png",
+    "bytes": 1368916,
+    "sha256": "d5ea215501b3e4270100eb1abb60fe89672fef575d6e57f7a7ee7aaff58fe09b"
+  },
+  {
+    "path": "assets/canon/CANON-52.png",
+    "bytes": 1366843,
+    "sha256": "bdc3f6fb245cbe2db09e1990f1084c5bed3949b41ee9215c14602952adfac433"
+  },
+  {
+    "path": "assets/canon/CANON-53.png",
+    "bytes": 1380993,
+    "sha256": "63f94bf17f722b791a85840f972ba35030c846c04c59e8fd630d26d6094af013"
+  },
+  {
+    "path": "assets/canon/CANON-54.png",
+    "bytes": 1381544,
+    "sha256": "c62fadaef4af6ba57ed45163b8bed0b6af9897a49ac982075e78de85765eeffe"
+  },
+  {
+    "path": "assets/canon/CANON-55.png",
+    "bytes": 1376826,
+    "sha256": "39d63e32763a570fe607fb7578bbd295b4af74088e98bd4bd8f1c5ae73e79b6a"
+  },
+  {
+    "path": "assets/canon/CANON-56.png",
+    "bytes": 1437489,
+    "sha256": "e0fdccc9a6dde4ed91cf4d99a0c954030dc6e9e6a503054a99cdbcc37bb80317"
+  },
+  {
+    "path": "assets/canon/CANON-57.png",
+    "bytes": 1457139,
+    "sha256": "7705ac3748d25175c56ece87afa2e9d5701cad67f3e95fcc71c5e42b105e1c8c"
+  },
+  {
+    "path": "assets/canon/CANON-58.png",
+    "bytes": 1498930,
+    "sha256": "b35681b895d4d5b7a80572f9c09054fb3071770485e73a001f5f172fa441ce2f"
+  },
+  {
+    "path": "assets/canon/CANON-59.png",
+    "bytes": 1478003,
+    "sha256": "98a9eb1a1d6a984adb7dede9efb44343a1068960f787e7de33236fdc1a51507d"
+  },
+  {
+    "path": "assets/canon/CANON-60.png",
+    "bytes": 1464778,
+    "sha256": "ecc259529edab6f2d86428546109727f4ef753c4f20f0603b7c5988e628a1f08"
+  },
+  {
+    "path": "assets/canon/CANON-61.png",
+    "bytes": 1504422,
+    "sha256": "b5a32be66a27fc1e32395d8d9650cbce5576e1e7c49b6390a23438f5c5e9f225"
+  },
+  {
+    "path": "assets/canon/CANON-62.png",
+    "bytes": 1543138,
+    "sha256": "668f3f7cccfd5d07d11356e0ac1444a0724d82279aee4ac7b1465f6cba09a20b"
+  },
+  {
+    "path": "assets/canon/CANON-63.png",
+    "bytes": 1552775,
+    "sha256": "e79351bd31dcaaea5d0e91b4a1865924ceba4608c53498b46e905446380171dc"
+  },
+  {
+    "path": "assets/poses/CANON-34_POSE-01_V02-APPROVED.png",
+    "bytes": 907395,
+    "sha256": "897e67da4f5fac1b11dc5ff29dd9f30e2f51831721d0cf6431e7a36f058b4b60"
+  },
+  {
+    "path": "assets/poses/CANON-34_POSE-02_V02-APPROVED.png",
+    "bytes": 1432752,
+    "sha256": "551c9474202f1520fd1c290369c9b4a2bc730a935bff2b4d13dfef137c11724f"
+  },
+  {
+    "path": "assets/poses/CANON-34_POSE-03_V02-APPROVED.png",
+    "bytes": 1514560,
+    "sha256": "72692423d415ecf521e49f9e892c460221aa4ebd0233a50b221dad99a05be4ad"
+  },
+  {
+    "path": "assets/poses/CANON-34_POSE-04_V02-APPROVED.png",
+    "bytes": 2016438,
+    "sha256": "8a284d3df389af5bb20b482af5284b560a963fdf721c33fdf0d6291871955851"
+  },
+  {
+    "path": "assets/poses/CANON-34_POSE-05_V02-APPROVED.png",
+    "bytes": 1526144,
+    "sha256": "8891739c8fb829d77b41962f40f7193ad0b68b4a602b807d5387443b3deadfbc"
+  },
+  {
+    "path": "assets/poses/CANON-34_POSE-06_V02-APPROVED.png",
+    "bytes": 1534665,
+    "sha256": "c6f910232843160d5055128a80463652bc50f4063a07f462986f4f9d1908c761"
+  },
+  {
+    "path": "assets/poses/CANON-34_POSE-07_V02-APPROVED.png",
+    "bytes": 1383505,
+    "sha256": "74d532ce16060a0c3bc7c84481e10db9ed793051f7cb7cad87dd18a4f5f80efe"
+  },
+  {
+    "path": "assets/poses/CANON-34_POSE-08_V02-APPROVED.png",
+    "bytes": 1487838,
+    "sha256": "fb75f8780f64b11373b54ce284474d5e373908312e05525b79c5439811ce54e3"
+  },
+  {
+    "path": "assets/poses/CANON-34_POSE-09_V02-APPROVED.png",
+    "bytes": 1176474,
+    "sha256": "45dc5bd92cef425246e0e7bcd4957e5223b9bbcbde1171499c2604945cb1474d"
+  },
+  {
+    "path": "assets/poses/CANON-34_POSE-10_V02-APPROVED.png",
+    "bytes": 1470092,
+    "sha256": "b6cbec5f9aed8d1cb52aa9a1c5414f484d5fa6a67d7ef51d9232795d96eda795"
+  },
+  {
+    "path": "assets/reveal/REVEAL-ICON_DOWNLOAD_BLUE_V01-APPROVED.png",
+    "bytes": 1052823,
+    "sha256": "076e71b50a747b791f8e2ea7584c2802a61007bcc93bfb9f6019e8bf3af3a07b"
+  },
+  {
+    "path": "assets/reveal/REVEAL-ICON_HEART_FAVORITE_RED_V01-APPROVED.png",
+    "bytes": 740657,
+    "sha256": "a826d66299f82dc282869a399d50f7c2443d8664b6e1c01e752b5cd080a154f1"
+  },
+  {
+    "path": "assets/reveal/REVEAL-ICON_REFRESH_NEW-BUILD_GREEN_V01-APPROVED.png",
+    "bytes": 1036512,
+    "sha256": "a57f63ab99ed6de1971838d9831150a11cbbcd91d57ae255ea39f22ce79f2561"
+  },
+  {
+    "path": "assets/studios/STUDIO-00_RASYELA_SEATED_V01-APPROVED.png",
+    "bytes": 2984533,
+    "sha256": "43aca69b7ecb42e6aa002da273ec926df0969c5b0ad3714b29451dfbdbc5c23d"
+  },
+  {
+    "path": "assets/studios/STUDIO-00_RASYELA_STANDARD_V01-APPROVED.png",
+    "bytes": 3106784,
+    "sha256": "8f60da8f5bbc5f946e0947fd08f707b2376ca4dfbd1688ca91bfe53e9515537f"
+  },
+  {
+    "path": "assets/studios/STUDIO-00_RASYELA_TRY-ON_V01-APPROVED.png",
+    "bytes": 3008352,
+    "sha256": "1997fd4e1fef8b2c04e9f74ede81d7b0856d2ce6068d85965ae4370bc5054789"
+  },
+  {
+    "path": "assets/studios/STUDIO-01_INDOOR-OFFICE_SEATED_V01-APPROVED.png",
+    "bytes": 3033945,
+    "sha256": "924efe8e12c2fe9e426dfe549718dc37767b1ec85a0b3ee20529ca8d4383cdc8"
+  },
+  {
+    "path": "assets/studios/STUDIO-01_INDOOR-OFFICE_STANDARD_V01-APPROVED.png",
+    "bytes": 2967846,
+    "sha256": "93ea3741ac4648dbaf266e2372945779d451bd0a118e02923c91469338a2a3c5"
+  },
+  {
+    "path": "assets/studios/STUDIO-02_INDOOR-LIVING-ROOM_SEATED_V01-APPROVED.png",
+    "bytes": 3146526,
+    "sha256": "44ca901d2fd6c98865fc4d582029c623b63a21814cfd4858530406166e6a459f"
+  },
+  {
+    "path": "assets/studios/STUDIO-02_INDOOR-LIVING-ROOM_STANDARD_V01-APPROVED.png",
+    "bytes": 3153770,
+    "sha256": "842550c8211d9ef22e7cbf5a794d2c8444640765c576f933d140c1247eab3252"
+  },
+  {
+    "path": "assets/studios/STUDIO-03_INDOOR-DISCO_SEATED_V01-APPROVED.png",
+    "bytes": 3190157,
+    "sha256": "2d91b125ea795ca03b6d2143020b3b4422dea9a76f473f315c56bdd90b34ac9e"
+  },
+  {
+    "path": "assets/studios/STUDIO-03_INDOOR-DISCO_STANDARD_V01-APPROVED.png",
+    "bytes": 3162180,
+    "sha256": "35127c75501b7d5eb5d66a355f42ec90b343defd5e80b308f9bd661f7b4e2458"
+  },
+  {
+    "path": "assets/studios/STUDIO-04_OUTDOOR-SUNNY-PATIO_SEATED_V01-APPROVED.png",
+    "bytes": 3976472,
+    "sha256": "4b657f5231a82f623a149d55959f1614dac016f2a321623d1802cc4b98210bc0"
+  },
+  {
+    "path": "assets/studios/STUDIO-04_OUTDOOR-SUNNY-PATIO_STANDARD_V01-APPROVED.png",
+    "bytes": 3813217,
+    "sha256": "099e8997708cb7324c50399245eb44b9903c058f53829100d214866ccdc3d549"
+  },
+  {
+    "path": "assets/studios/STUDIO-05_OUTDOOR-GOLDEN-HOUR_SEATED_V01-APPROVED.png",
+    "bytes": 3601772,
+    "sha256": "a6d0fc8107d89dbb49a3b665b66ebcf6e9da11b54e1b48eb379d810759c2e9f9"
+  },
+  {
+    "path": "assets/studios/STUDIO-05_OUTDOOR-GOLDEN-HOUR_STANDARD_V01-APPROVED.png",
+    "bytes": 3598370,
+    "sha256": "b1d6007e5f00df4332226bc2b6b782abf6263477287a9a42667a028d483d5fbe"
+  },
+  {
+    "path": "generator.js",
+    "bytes": 2142,
+    "sha256": "948fc9e5bded675f4336db5358a3113c2062e79f1eae77fa18f4bbb84543f996"
+  },
+  {
+    "path": "index.html",
+    "bytes": 402,
+    "sha256": "6ae06c817de75307db5c443a2744994a4b17966a8c80e44b80be1b49e5846a3e"
+  },
+  {
+    "path": "media-store.js",
+    "bytes": 1379,
+    "sha256": "9c56e4a4a935a34732871c234a58616df844d4705b687c61a1b35f8f61b4e691"
+  },
+  {
+    "path": "styles.css",
+    "bytes": 7531,
+    "sha256": "f61769da2d5b8582835707c0f7c8f2ec739571dbc8ee07f535c027e9a37a29a9"
+  }
+]
